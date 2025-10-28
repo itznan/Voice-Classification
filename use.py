@@ -142,7 +142,7 @@ class AudioClassifier:
             raise FileNotFoundError(f"Audio file not found: {audio_file}")
         
         if verbose:
-            print(f"\n🎵 Analyzing: {audio_file}")
+            print(f"\nAnalyzing: {audio_file}")
             print("-" * 60)
         
         # Extract features
@@ -183,8 +183,8 @@ class AudioClassifier:
         print(f"\n{'='*60}")
         print("PREDICTION RESULT")
         print(f"{'='*60}")
-        print(f"\n🎯 Predicted Class: {result['predicted_class']}")
-        print(f"📊 Confidence: {result['confidence']*100:.2f}%")
+        print(f"\nPredicted Class: {result['predicted_class']}")
+        print(f"Confidence: {result['confidence']*100:.2f}%")
         
         # Confidence bar
         bar_length = 40
@@ -192,7 +192,7 @@ class AudioClassifier:
         bar = '█' * filled + '░' * (bar_length - filled)
         print(f"   [{bar}]")
         
-        print("\n📈 All Class Probabilities:")
+        print("\nAll Class Probabilities:")
         # Sort by probability (descending)
         sorted_probs = sorted(result['probabilities'].items(), 
                             key=lambda x: x[1], reverse=True)
@@ -208,7 +208,7 @@ class AudioClassifier:
     
     def predict_batch(self, audio_files, output_file=None):
         """Predict classes for multiple audio files"""
-        print(f"\n🎵 Batch Processing: {len(audio_files)} files")
+        print(f"\nBatch Processing: {len(audio_files)} files")
         print("="*60)
         
         results = []
@@ -256,9 +256,9 @@ class AudioClassifier:
         try:
             with open(output_file, 'w') as f:
                 json.dump(results, f, indent=2)
-            print(f"\n💾 Results saved to: {output_file}")
+            print(f"\nResults saved to: {output_file}")
         except Exception as e:
-            print(f"\n❌ Error saving results: {e}")
+            print(f"\nError saving results: {e}")
     
     def predict_directory(self, directory, recursive=False, output_file=None):
         """Predict all audio files in a directory"""
@@ -324,7 +324,7 @@ Examples:
     try:
         classifier = AudioClassifier(model_path=args.model)
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
         sys.exit(1)
     
     # Show info and exit
@@ -334,7 +334,7 @@ Examples:
     # Process directory
     if args.directory:
         if not os.path.isdir(args.directory):
-            print(f"❌ Error: Directory not found: {args.directory}")
+            print(f"Error: Directory not found: {args.directory}")
             sys.exit(1)
         
         classifier.predict_directory(args.directory, args.recursive, args.output)
@@ -342,7 +342,7 @@ Examples:
     
     # Process individual files
     if not args.files:
-        print("❌ Error: No audio files specified")
+        print("Error: No audio files specified")
         print("Use --help for usage information")
         sys.exit(1)
     
@@ -351,7 +351,7 @@ Examples:
         try:
             classifier.predict(args.files[0])
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
             sys.exit(1)
     else:
         # Multiple files
@@ -359,3 +359,4 @@ Examples:
 
 if __name__ == "__main__":
     main()
+
