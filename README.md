@@ -1,80 +1,208 @@
-# Audio Classification Tool
+# 🎵 Advanced Audio Classifier  
+**Author:** itznan  
 
-A simple yet powerful application that analyzes MP3 files to identify the sound content. Using advanced machine learning algorithms, it processes audio features to determine what type of sound is present.
+An advanced machine learning pipeline for classifying audio samples using feature extraction (MFCCs, spectral features, chroma, tempo, etc.) and ensemble learning (Random Forest, Gradient Boosting, SVM).  
+This project includes both a **training pipeline** and a **user-friendly prediction interface**.
 
-## Features
+---
 
-- User-friendly file selection interface
-- Support for multiple audio formats (MP3, WAV, OGG, FLAC, M4A)
-- Advanced acoustic feature extraction using librosa
-- Ensemble machine learning model for accurate classification
-- Detailed results with confidence scores for each class
-- Visual feedback through dialog boxes
+## 📁 Project Structure
+```
 
-## Installation
+.
+├── train.py           # Full training and evaluation pipeline
+├── use.py             # Easy-to-use prediction interface
+├── Data/              # Directory containing audio files organized in subfolders by class
+├── voice_classifier.pkl  # Saved trained model (generated after training)
+└── requirements.txt   # Python dependencies
 
-1. Clone this repository
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-   
-## Usage
+````
 
-1. Run the training script first (if model doesn't exist):
-   ```
-   python train.py
-   ```
+---
 
-2. Run the classification tool:
-   ```
-   python use.py
-   ```
+## 🚀 Features
+✅ Automatic feature extraction from audio files  
+✅ Data augmentation (time stretch, pitch shift, noise)  
+✅ Caching system for faster feature reuse  
+✅ Model optimization with GridSearchCV  
+✅ Ensemble model combining Random Forest, Gradient Boosting, and SVM  
+✅ Detailed logs, metrics, and confusion matrix output  
+✅ User-friendly CLI for predictions and batch processing  
 
-3. Select an audio file when prompted
+---
 
-4. View the classification results both in the terminal and in a popup dialog
+## 🧩 Requirements
+Install all dependencies:
+```bash
+pip install -r requirements.txt
+````
 
-## Technical Details
+### Dependencies include:
 
-The tool extracts meaningful acoustic features from audio files using:
-- MFCCs (Mel-frequency cepstral coefficients)
-- Spectral centroids
-- Energy measurements
-- Zero-crossing rates
+* numpy
+* librosa
+* scikit-learn
+* joblib
+* PyYAML
+* tqdm
+* soundfile
 
-Classification is performed using an ensemble of models:
-- Random Forest
-- Gradient Boosting
-- SVM (for smaller datasets)
+---
 
-## Dataset Structure
+## 🧠 Dataset Structure
 
-To train your own models, organize your audio files in the following structure:
+Your audio data should be placed in the `Data/` directory, organized as follows:
+
 ```
 Data/
-  ├── class1/
-  │     ├── sample1.mp3
-  │     ├── sample2.mp3
-  │     └── ...
-  ├── class2/
-  │     ├── sample1.mp3
-  │     ├── sample2.mp3
-  │     └── ...
-  └── ...
+├── class_1/
+│   ├── audio1.wav
+│   ├── audio2.wav
+│   └── ...
+├── class_2/
+│   ├── audio1.wav
+│   ├── audio2.wav
+│   └── ...
+└── ...
 ```
 
-Where each folder name in the Data directory represents a class label.
+Each subdirectory name represents a class label.
 
-## Requirements
+---
 
-- Python 3.6+
-- numpy
-- librosa
-- scikit-learn
-- joblib
-- tkinter
+## ⚙️ Training the Model
 
-## License
+To train the model:
 
-This project is open source and available under the MIT License. 
+```bash
+python train.py --data-dir Data
+```
+
+### Optional Arguments:
+
+| Argument       | Description              |
+| -------------- | ------------------------ |
+| `--config`     | Path to YAML config file |
+| `--model-path` | Custom model save path   |
+| `--limit`      | Limit samples per class  |
+| `--augment`    | Enable data augmentation |
+| `--debug`      | Enable debug logging     |
+| `--no-cache`   | Disable feature caching  |
+
+Example:
+
+```bash
+python train.py --data-dir Data --augment --limit 100
+```
+
+After training, a model file `voice_classifier.pkl` will be saved automatically.
+
+---
+
+## 🔍 Using the Model
+
+You can classify audio using the **use.py** script.
+
+### Predict a Single Audio File
+
+```bash
+python use.py path/to/audio.wav
+```
+
+### Predict Multiple Files
+
+```bash
+python use.py audio1.wav audio2.wav audio3.wav
+```
+
+### Predict All Files in a Directory
+
+```bash
+python use.py --directory ./test_audio/
+```
+
+### Recursive Prediction and JSON Output
+
+```bash
+python use.py --directory ./test_audio/ --recursive --output results.json
+```
+
+### Show Model Information
+
+```bash
+python use.py --model voice_classifier.pkl --info
+```
+
+---
+
+## 🧾 Example Output
+
+```
+🎯 Predicted Class: female_voice
+📊 Confidence: 92.47%
+[█████████████████████████░░░░░░░░░░░░]
+```
+
+---
+
+## 🧠 Model Details
+
+* **Feature extraction:** MFCC, spectral centroid, bandwidth, rolloff, chroma, ZCR, energy, tempo
+* **Models used:**
+
+  * Random Forest (optimized via GridSearch)
+  * Gradient Boosting
+  * Support Vector Machine (for smaller datasets)
+* **Ensemble:** Weighted soft voting classifier
+
+---
+
+## 📊 Logs and Outputs
+
+During training, detailed logs are saved as:
+
+```
+training_YYYYMMDD_HHMMSS.log
+```
+
+This includes:
+
+* Training/validation/test accuracy
+* Best hyperparameters
+* Confusion matrix
+* Top features by importance
+
+---
+
+## 🧰 Saving and Loading
+
+The model and preprocessing scaler are stored in:
+
+```
+voice_classifier.pkl
+```
+
+This file contains:
+
+* Trained ensemble model
+* Individual models (RF, GB, SVM)
+* Feature scaler
+* Class mappings
+* Training metadata
+
+---
+
+## 👤 Author
+
+**itznan**
+
+> Built for experimentation, learning, and advanced audio classification research.
+
+---
+
+## 🪶 License
+
+This project is open for educational and research purposes.
+Feel free to modify and extend it — just credit **itznan** when you do.
+
+---
