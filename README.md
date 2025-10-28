@@ -135,7 +135,7 @@ python use.py --model voice_classifier.pkl --info
 
 ---
 
-## 🧾 Example Output
+## Example Output
 
 ```
 Predicted Class: female_voice
