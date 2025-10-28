@@ -1,4 +1,4 @@
-# 🎵 Advanced Audio Classifier  
+# Advanced Audio Classifier  
 **Author:** itznan  
 
 An advanced machine learning pipeline for classifying audio samples using feature extraction (MFCCs, spectral features, chroma, tempo, etc.) and ensemble learning (Random Forest, Gradient Boosting, SVM).  
@@ -6,7 +6,7 @@ This project includes both a **training pipeline** and a **user-friendly predict
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 
 .
@@ -20,18 +20,18 @@ This project includes both a **training pipeline** and a **user-friendly predict
 
 ---
 
-## 🚀 Features
-✅ Automatic feature extraction from audio files  
-✅ Data augmentation (time stretch, pitch shift, noise)  
-✅ Caching system for faster feature reuse  
-✅ Model optimization with GridSearchCV  
-✅ Ensemble model combining Random Forest, Gradient Boosting, and SVM  
-✅ Detailed logs, metrics, and confusion matrix output  
-✅ User-friendly CLI for predictions and batch processing  
+## Features
+Automatic feature extraction from audio files  
+Data augmentation (time stretch, pitch shift, noise)  
+Caching system for faster feature reuse  
+Model optimization with GridSearchCV  
+Ensemble model combining Random Forest, Gradient Boosting, and SVM  
+Detailed logs, metrics, and confusion matrix output  
+User-friendly CLI for predictions and batch processing  
 
 ---
 
-## 🧩 Requirements
+## Requirements
 Install all dependencies:
 ```bash
 pip install -r requirements.txt
@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🧠 Dataset Structure
+## Dataset Structure
 
 Your audio data should be placed in the `Data/` directory, organized as follows:
 
@@ -70,7 +70,7 @@ Each subdirectory name represents a class label.
 
 ---
 
-## ⚙️ Training the Model
+## Training the Model
 
 To train the model:
 
@@ -99,7 +99,7 @@ After training, a model file `voice_classifier.pkl` will be saved automatically.
 
 ---
 
-## 🔍 Using the Model
+## Using the Model
 
 You can classify audio using the **use.py** script.
 
@@ -138,14 +138,14 @@ python use.py --model voice_classifier.pkl --info
 ## 🧾 Example Output
 
 ```
-🎯 Predicted Class: female_voice
-📊 Confidence: 92.47%
+Predicted Class: female_voice
+Confidence: 92.47%
 [█████████████████████████░░░░░░░░░░░░]
 ```
 
 ---
 
-## 🧠 Model Details
+## Model Details
 
 * **Feature extraction:** MFCC, spectral centroid, bandwidth, rolloff, chroma, ZCR, energy, tempo
 * **Models used:**
@@ -157,7 +157,7 @@ python use.py --model voice_classifier.pkl --info
 
 ---
 
-## 📊 Logs and Outputs
+## Logs and Outputs
 
 During training, detailed logs are saved as:
 
@@ -174,7 +174,7 @@ This includes:
 
 ---
 
-## 🧰 Saving and Loading
+## Saving and Loading
 
 The model and preprocessing scaler are stored in:
 
@@ -192,7 +192,7 @@ This file contains:
 
 ---
 
-## 👤 Author
+## Author
 
 **itznan**
 
@@ -200,7 +200,7 @@ This file contains:
 
 ---
 
-## 🪶 License
+## License
 
 This project is open for educational and research purposes.
 Feel free to modify and extend it — just credit **itznan** when you do.
